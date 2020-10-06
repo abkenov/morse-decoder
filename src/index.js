@@ -38,7 +38,32 @@ const MORSE_TABLE = {
 };
 
 function decode(expr) {
-    // write your solution here
+    let result = ""
+
+    for (let i = 0; i < expr.length / 10; ++i) {
+        let cypher_char = expr.slice(i*10, i*10 + 10)
+
+        if (cypher_char === "**********") {
+            result += " "
+            continue
+        }
+
+        let morse_key = ""
+
+        for (let j = 0; j < 5; ++j) {
+            let char = (cypher_char.slice(j*2, j*2 + 2))
+            
+            if (char === "10") {
+                morse_key += "."
+            } else if (char === "11") {
+                morse_key += "-"
+            } 
+        }
+
+        result += MORSE_TABLE[morse_key]
+    }
+
+    return result
 }
 
 module.exports = {
